@@ -1,15 +1,15 @@
 //
 //  Club.h
-//  
+//  Clubby
 //
 //  Created by Cory Alder on 2015-06-30.
-//
+//  Copyright (c) 2015 Cory Alder. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class NSManagedObject;
+@class Person;
 
 @interface Club : NSManagedObject
 
@@ -19,8 +19,8 @@
 
 @interface Club (CoreDataGeneratedAccessors)
 
-- (void)addMembersObject:(NSManagedObject *)value;
-- (void)removeMembersObject:(NSManagedObject *)value;
+- (void)addMembersObject:(Person *)value;
+- (void)removeMembersObject:(Person *)value;
 - (void)addMembers:(NSSet *)values;
 - (void)removeMembers:(NSSet *)values;
 

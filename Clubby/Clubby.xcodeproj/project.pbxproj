@@ -16,8 +16,8 @@
 		8B2334EA1B42A40800B66F4F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2334E91B42A40800B66F4F /* Images.xcassets */; };
 		8B2334ED1B42A40800B66F4F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2334EB1B42A40800B66F4F /* LaunchScreen.xib */; };
 		8B2334F91B42A40800B66F4F /* ClubbyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2334F81B42A40800B66F4F /* ClubbyTests.m */; };
-		8B2335061B42A4B900B66F4F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2335031B42A4B900B66F4F /* Person.m */; };
-		8B2335071B42A4B900B66F4F /* Club.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2335051B42A4B900B66F4F /* Club.m */; };
+		8B2335481B42DD6800B66F4F /* Club.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B2335471B42DD6800B66F4F /* Club.m */; };
+		8B23354B1B42DD6800B66F4F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B23354A1B42DD6800B66F4F /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,10 +47,10 @@
 		8B2334F21B42A40800B66F4F /* ClubbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClubbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2334F71B42A40800B66F4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B2334F81B42A40800B66F4F /* ClubbyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClubbyTests.m; sourceTree = "<group>"; };
-		8B2335021B42A4B900B66F4F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
-		8B2335031B42A4B900B66F4F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
-		8B2335041B42A4B900B66F4F /* Club.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Club.h; sourceTree = "<group>"; };
-		8B2335051B42A4B900B66F4F /* Club.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Club.m; sourceTree = "<group>"; };
+		8B2335461B42DD6800B66F4F /* Club.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Club.h; sourceTree = "<group>"; };
+		8B2335471B42DD6800B66F4F /* Club.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Club.m; sourceTree = "<group>"; };
+		8B2335491B42DD6800B66F4F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		8B23354A1B42DD6800B66F4F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,11 +136,11 @@
 		8B2335081B42A4C300B66F4F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B2335491B42DD6800B66F4F /* Person.h */,
+				8B23354A1B42DD6800B66F4F /* Person.m */,
+				8B2335461B42DD6800B66F4F /* Club.h */,
+				8B2335471B42DD6800B66F4F /* Club.m */,
 				8B2334DD1B42A40800B66F4F /* Clubby.xcdatamodeld */,
-				8B2335021B42A4B900B66F4F /* Person.h */,
-				8B2335031B42A4B900B66F4F /* Person.m */,
-				8B2335041B42A4B900B66F4F /* Club.h */,
-				8B2335051B42A4B900B66F4F /* Club.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -245,13 +245,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B2335061B42A4B900B66F4F /* Person.m in Sources */,
 				8B2334E51B42A40800B66F4F /* DetailViewController.m in Sources */,
 				8B2334E21B42A40800B66F4F /* MasterViewController.m in Sources */,
+				8B23354B1B42DD6800B66F4F /* Person.m in Sources */,
 				8B2334DC1B42A40800B66F4F /* AppDelegate.m in Sources */,
 				8B2334DF1B42A40800B66F4F /* Clubby.xcdatamodeld in Sources */,
 				8B2334D91B42A40800B66F4F /* main.m in Sources */,
-				8B2335071B42A4B900B66F4F /* Club.m in Sources */,
+				8B2335481B42DD6800B66F4F /* Club.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +446,7 @@
 				8B2334FE1B42A40800B66F4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B2334FF1B42A40800B66F4F /* Build configuration list for PBXNativeTarget "ClubbyTests" */ = {
 			isa = XCConfigurationList;
@@ -454,6 +455,7 @@
 				8B2335011B42A40800B66F4F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

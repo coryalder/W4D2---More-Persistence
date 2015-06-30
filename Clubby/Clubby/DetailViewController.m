@@ -56,10 +56,8 @@
 
 
 - (void)insertNewObject:(id)sender {
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"New Person" message:@"Enter the name of a member of this club" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"New Person" message:@"Enter the name of a member of this person" preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         
@@ -68,23 +66,59 @@
     [alert addAction:[UIAlertAction actionWithTitle:@"Save" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         
         UITextField *textField = [alert.textFields firstObject];
-        
-        Person *newPerson = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-        
-        newPerson.name = textField.text;
-        
-        // Save the context.
-        NSError *error = nil;
-        if (![context save:&error]) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
+        //
+        [self addPersonWithName:textField.text];
     }]];
     
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+-(void)addPersonWithName:(NSString *)name {
+    
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    
+    
+    Person *person = [self personWithName:name];
+    
+    if (!person) {
+        person = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+        
+        person.name = name;
+    }
+    
+    [person addClubsObject:self.detailItem];
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
+-(Person *)personWithName:(NSString *)name {
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Person"];
+    
+    fetchRequest.fetchLimit = 1;
+    
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name == %@", name];
+    
+    NSError *error;
+    
+    NSArray *results = [self.detailItem.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    Person *foundPerson = [results firstObject];
+    
+    
+    return foundPerson;
+    // query the core data stack and find an existing Person with this name.
+    // returns nil if it doesn't exist.
 }
 
 
@@ -126,7 +160,7 @@
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    Club *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Person *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = object.name;
 }
 
@@ -152,8 +186,13 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"clubs contains %@", self.detailItem];
+    
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
+    
+    [NSFetchedResultsController deleteCacheWithName:nil];
+    
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.detailItem.managedObjectContext sectionNameKeyPath:nil cacheName:self.detailItem.name];
     
     aFetchedResultsController.delegate = self;

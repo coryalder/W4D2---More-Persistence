@@ -34,6 +34,30 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)viewWillAppear:(BOOL)animated {
+    
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Person"];
+    
+    //fetchRequest.predicate = [NSPredicate predicateWithFormat:@"club != nil"];
+    
+    NSError *error;
+    
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+    
+    
+    
+    
+    if (error) {
+        NSLog(@"Error %@", error);
+    }
+    
+    self.title = [NSString stringWithFormat:@"%li Members", count];
+}
+
+
+
 - (void)insertNewObject:(id)sender {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
     NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
